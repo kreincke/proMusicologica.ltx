@@ -52,14 +52,13 @@ For setting up ***proMusicologica.ltx*** successfully:
    * copy `extracts/extract.md` to `extract/BIBTEXKEY.md`
    * read and excerpt/extract the secondary literature in the respective file
 3. Do your writing work
-   * edit / update your frame tex file *proMusicologica.tex*
+   * edit / update your frame tex file `source/pmArticle-[de|en].tex` respectively `source/pmBook-[de|en].tex`
    * create your snippets by copying *snippets/inc.snippet.tex* to *snippets/inc.YOURCHOICE.tex* and edit the files
    * integrate the snippets by using the LaTeX command `\input{snippets/inc.YOURCHOICE.tex}`
-   * Open a shell and type `make proMusicologica.pdf` to create a human readable version of your scientific work.
+   * Open a shell and type `make help` to get the commands you can use to compile your scientific work as PDF file.
+   * Type `make YOURCOMMAND` to really get the human readable version of your scientific work.
 
 If you want to rename the frame, also update the Makefile.
-
-If you want to see how the writing work can be done and how the result look,  change back into the cloned repository directory, and read `exampeles/humanities-1.0.pdf`. If helpful, study the respective sources under `humanities`
 
 ## Structure
 
@@ -108,8 +107,6 @@ Finally, ***proMusicologica.ltx*** contains
 ## Documentation
 
 We decided to apply _English_ as the primary project language although the intended users (= classical scholars) will probably come from German rather than form English speaking countries. There is no designated documentation other than this README.
-
-But there is a specific article, called humanities, which discusses the intended purpose of *proMusicologica* and explains on the base of its own LaTeX source code, how proMusicologica works. A readable PDF version of that article is stored in `examples`, the sources are stored in `humanities`. If you want to recompile the PDF version from the sources, open a shell, change into directory `humanities`, and type `make`.
 
 ## Contributions
 

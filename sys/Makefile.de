@@ -49,4 +49,4 @@ clean:  clear
 	@(cd source && make clean && make dclean)
 	if [ `ls *.pdf | wc -l` != 0  ]; then rm *.pdf; fi
 help:
-	@echo "make [bookd|booke|artld|artle|help|clean]"
+	@echo "make [bookd|artld|help|clean]"
