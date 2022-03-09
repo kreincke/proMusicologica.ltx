@@ -25,9 +25,9 @@ echo "collecting files for project $PID in language $LANG"
 
 if [ -d ${PID} ]; then rm -rf ${PID}; fi
 
-mkdir -p ${PID}
+mkdir -p ${PID}/references
 
-cp -rd README.md source tools ${PID}
+cp -rd README.md extracts source tools ${PID}
 if [ "${LANG}" == "${EN}" ] ; then
   find ${PID} -name "*-de.tex" | while read f; do rm $f; done
   cp sys/Makefile.en ${PID}/Makefile
