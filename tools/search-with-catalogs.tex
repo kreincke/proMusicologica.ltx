@@ -1,0 +1,277 @@
+% This file is part of proMusicologica.ltx
+% (c) 2022 Karsten Reincke (https://github.com/kreincke/proMusicologica.ltx)
+% It is distributed under the terms of the creative commons license
+% CC-BY-4.0 (= https://creativecommons.org/licenses/by/4.0/)
+
+\documentclass[
+  DIV=calc,
+  BCOR=5mm,
+  11pt,
+  headings=small,
+  oneside,
+  abstract=true,
+  toc=bib,
+  english,ngerman]{scrartcl}
+
+%%% (1) general configurations %%%
+\usepackage[utf8]{inputenc}
+\usepackage{a4}
+\usepackage[english,ngerman]{babel}
+
+\usepackage[
+  backend=biber,
+  style=authortitle-dw,
+  sortlocale=auto,
+]{biblatex}
+\input{../source/cfg/inc.cfg-biber-de.tex}
+
+\addbibresource{../source/bib/lit.verify.bib}
+%\addbibresource{../source/bib/lit.main.bib}
+
+% package for improving the grey value and the line feed handling
+\usepackage{microtype}
+
+%language specific quoting signs
+\usepackage[
+  style=german,
+  autostyle=true,
+]{csquotes}
+
+% language specific hyphenation
+\input{../source/cfg/inc.babelhyphenations.tex}
+
+%%% (3) layout page configuration %%%
+
+% select the visible parts of a page
+% S.31: { plain|empty|headings|myheadings }
+\pagestyle{headings}
+
+% select the wished style of page-numbering
+% S.32: { arabic,roman,Roman,alph,Alph }
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% select the wished distances using the general setlength order:
+% S.34 { baselineskip| parskip | parindent }
+% - general no indent for paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.2ex plus 0.2ex minus 0.2ex}
+
+
+%- start(footnote-configuration)
+
+\deffootnote[1.5em]{1.5em}{1.5em}{\textsuperscript{\thefootnotemark)\ }}
+
+%integrate nomenclature
+\input{../source/cfg/inc.cfg-ncl-de.tex}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{bookmarks=true,breaklinks=true,colorlinks=true,citecolor=blue,draft=false}
+
+\usepackage[dvips]{epsfig}
+
+% graphic
+\usepackage{graphicx,color}
+\usepackage{array}
+\usepackage{shadow}
+\usepackage{fancybox}
+
+
+%- end(footnote-configuration)
+
+% package for macking tables with broken lines
+\usepackage{multirow}
+
+%for using label as nameref
+\usepackage{nameref}
+
+
+\newcommand{\LibraryCatalogA}{ACM Digital Library}
+\newcommand{\LibraryCatalogB}{Web of Science}
+\newcommand{\LibraryCatalogC}{Hebis Portal}
+\newcommand{\LibraryCatalogD}{CiteSeer.IST FaM}
+\newcommand{\LibraryCatalogE}{Web of Knowledge}
+\newcommand{\LibraryCatalogF}{EZB FaM Informatik}
+\newcommand{\LibraryCatalogG}{EZB FaM Jura}
+\newcommand{\LibraryCatalogH}{IBZ (Int. Bibl. geistes-\&soz.-wis. Zeitschr.)}
+\newcommand{\LibraryCatalogI}{Int. Philsophiocal Bibl.}
+\newcommand{\LibraryCatalogJ}{Cambridge Journals Digital Archive}
+\newcommand{\LibraryCatalogK}{Index to theses (GB/IR)}
+\newcommand{\LibraryCatalogL}{Springer E-books (Comp. Science + Techn. \& Inf.)}
+\newcommand{\LibraryCatalogM}{Juris Spectrum Datenbank}
+\newcommand{\LibraryCatalogN}{Oldenbourg \& Akademie e-books (Inf., Phil)}
+\newcommand{\LibraryCatalogO}{Oxford Journals}
+%\newcommand{\LibraryCatalogP}{Library Catalog A}
+\newcommand{\LibraryCatalogX}{Library Catalog ?}
+
+\newcommand{\LibraryCatalogFA}{CiteSeer}
+\newcommand{\LibraryCatalogFB}{Amazon Book Store}
+\newcommand{\LibraryCatalogFC}{O'Reilly Book Store}
+\newcommand{\LibraryCatalogFD}{bibsonomy}
+\newcommand{\LibraryCatalogFE}{Google Scholar}
+\newcommand{\LibraryCatalogFF}{AarXiv.org [DA]}
+\newcommand{\LibraryCatalogFG}{Coll. of Comp. Science Bibl. [DA]}
+\newcommand{\LibraryCatalogFH}{Comp. Science Bibliography [DA]}
+\newcommand{\LibraryCatalogFI}{(F)ree (O)n-(L)ine (D)ictionary (o)f (C)omputing [DA]}
+\newcommand{\LibraryCatalogFJ}{INFODATA [DA]}
+\newcommand{\LibraryCatalogFK}{spires}
+\newcommand{\LibraryCatalogFL}{Hebis}
+\newcommand{\LibraryCatalogFM}{Web of Science}
+\newcommand{\LibraryCatalogFN}{Web of Knowledge}
+
+
+
+
+
+
+\newcommand{\SearchItemA}{Search Item A}
+\newcommand{\SearchItemB}{Search Item B}
+\newcommand{\SearchItemC}{Search Item C}
+\newcommand{\SearchItemD}{Search Item D}
+\newcommand{\SearchItemE}{Search Item E}
+\newcommand{\SearchItemF}{Search Item F}
+\newcommand{\SearchItemG}{Search Item G}
+\newcommand{\SearchItemH}{Search Item H}
+\newcommand{\SearchItemI}{Search Item I}
+\newcommand{\SearchItemJ}{Search Item J}
+\newcommand{\SearchItemK}{Search Item L}
+\newcommand{\SearchItemL}{Search Item M}
+
+% Marker for a catalog classification
+\newcommand{\NecessaryCatalog}{$\clubsuit$}
+\newcommand{\NecessaryCatalogDefinition}{unumgehbarer Katalog}
+\newcommand{\ImportantCatalog}{$\spadesuit$}
+\newcommand{\ImportantCatalogDefinition}{wichtiger Katalog}
+\newcommand{\UsefulCatalog}{$\heartsuit$}
+\newcommand{\UsefulCatalogDefinition}{nützlicher Katalog}
+\newcommand{\PossibleCatalog}{$\diamondsuit$}
+\newcommand{\PossibleCatalogDefinition}{möglicher Katalog}
+
+% Marker for a status reportin
+\newcommand{\many}{$\ast$}
+\newcommand{\manyDef}{viele Treffer gefunden}
+\newcommand{\some}{$\star$}
+\newcommand{\someDef}{einige Treffer gefunden}
+\newcommand{\few}{$\odot$}
+\newcommand{\fewDef}{wenige Treffer gefunden}
+\newcommand{\nothing}{$\neg$}
+\newcommand{\nothingDef}{keine Treffer gefunden}
+\newcommand{\ongoing}{$\circ$}
+\newcommand{\ongoingDef}{gerade ausgeführte Auswertung}
+\newcommand{\open}{?}
+\newcommand{\openDef}{noch ausstehende Auswertung}
+\newcommand{\ignored}{-}
+\newcommand{\ignoredDef}{(letztlich) nicht mehr ausgewertet}
+
+
+%% use all entries of the bliography
+
+\begin{document}
+
+\begin{center}
+\begin{table}
+\scriptsize
+\caption{Resourcen [aus der/über die] Frankfurter Universitätsbibliothek$^a$}
+\begin{tabular}[h]{|r|c|c|c||c||c|c|c|c||c|c|c|c|c|c|c|c||c|}
+\hline
+& \rotatebox{90}{$\clubsuit$ \textit{\LibraryCatalogA}}
+& \rotatebox{90}{$\clubsuit$ \textit{\LibraryCatalogB}}
+& \rotatebox{90}{$\clubsuit$ \textit{\LibraryCatalogC}}
+& \rotatebox{90}{$\spadesuit$ \textit{\LibraryCatalogD}}
+& \rotatebox{90}{$\heartsuit$ \textit{\LibraryCatalogE}}
+& \rotatebox{90}{$\heartsuit$ \textit{\LibraryCatalogF}}
+& \rotatebox{90}{$\heartsuit$ \textit{\LibraryCatalogG}}
+& \rotatebox{90}{$\heartsuit$ \textit{\LibraryCatalogH}}
+& \rotatebox{90}{$\diamondsuit$ \textit{\LibraryCatalogI}}
+& \rotatebox{90}{$\diamondsuit$ \textit{\LibraryCatalogJ}}
+& \rotatebox{90}{$\diamondsuit$ \textit{\LibraryCatalogK}}
+& \rotatebox{90}{$\diamondsuit$ \textit{\LibraryCatalogL}}
+& \rotatebox{90}{$\diamondsuit$ \textit{\LibraryCatalogM}}
+& \rotatebox{90}{$\diamondsuit$ \textit{\LibraryCatalogN}}
+& \rotatebox{90}{\textit{\LibraryCatalogO}}
+\\
+\hline \hline
+\SearchItemA
+  & \many & \some & \few & \nothing & \ongoing & \open
+  & \ignored & ? & ? & ? & ? & ? & ? & ? & ?\\
+\hline
+\SearchItemB
+  & ? & ? & ? & ? & ? & ?
+  & ? & ? & ? & ? & ? & ? & ? & ? & ?\\
+\hline
+\SearchItemC
+  & ? & ? & ? & ? & ? & ?
+  & ? & ? & ? & ? & ? & ? & ? & ? & ?\\
+\hline
+\hline
+\end{tabular}
+\\
+\footnotesize{$^a$ \cite[s.][n.P.]{UbFaM2018a}}
+\end{table}
+\end{center}
+
+\begin{description}
+  \item[Katalogformen] :-
+    \begin{description}
+      \item[\NecessaryCatalog] :- \NecessaryCatalogDefinition
+      \item[\ImportantCatalog] :- \ImportantCatalogDefinition
+      \item[\UsefulCatalog] :- \UsefulCatalogDefinition
+      \item[\PossibleCatalog] :- \PossibleCatalogDefinition
+    \end{description}
+  \item[Berichtstatus] :-
+    \begin{description}
+      \item[\many] :- \manyDef
+      \item[\some] :- \someDef
+      \item[\few] :- \fewDef
+      \item[\nothing] :- \nothingDef
+      \item[\ongoing] :- \ongoingDef
+      \item[\open] :- \openDef
+      \item[\ignored] :- \ignoredDef
+    \end{description}
+\end{description}
+
+\newpage
+
+\begin{center}
+\begin{table}
+\scriptsize
+\caption{Freie Internetresourcen$^b$}
+\begin{tabular}[h]{|r|c|c|c||c||c|c|c|c||c|c|c|c|c|c||}
+\hline
+& \rotatebox{90}{$\clubsuit$ \textit{\LibraryCatalogFA}}
+& \rotatebox{90}{$\clubsuit$ \textit{\LibraryCatalogFB}}
+& \rotatebox{90}{$\clubsuit$ \textit{\LibraryCatalogFC}}
+& \rotatebox{90}{$\spadesuit$ \textit{\LibraryCatalogFD}}
+& \rotatebox{90}{$\heartsuit$ \textit{\LibraryCatalogFE}}
+& \rotatebox{90}{$\heartsuit$ \textit{\LibraryCatalogFF}}
+& \rotatebox{90}{$\heartsuit$ \textit{\LibraryCatalogFG}}
+& \rotatebox{90}{$\heartsuit$ \textit{\LibraryCatalogFH}}
+& \rotatebox{90}{$\diamondsuit$ \textit{\LibraryCatalogFI}}
+& \rotatebox{90}{$\diamondsuit$ \textit{\LibraryCatalogFJ}}
+& \rotatebox{90}{$\diamondsuit$ \textit{\LibraryCatalogFK}}
+& \rotatebox{90}{$\diamondsuit$ \textit{\LibraryCatalogFL}}
+& \rotatebox{90}{$\diamondsuit$ \textit{\LibraryCatalogFM}}
+& \rotatebox{90}{$\diamondsuit$ \textit{\LibraryCatalogFN}}
+\\
+\hline \hline
+\SearchItemA
+  & \many & \some & \few & \nothing & \ongoing & \open
+  & \ignored & ? & ? & ? & ? & ? & ? & ?\\
+\hline
+\SearchItemB
+  & ? & ? & ? & ? & ? & ?
+  & ? & ? & ? & ? & ? & ? & ? & ?\\
+\hline
+\SearchItemC
+  & ? & ? & ? & ? & ? & ?
+  & ? & ? & ? & ? & ? & ? & ? & ?\\
+\hline
+\hline
+\end{tabular}
+\end{table}
+\footnotesize{$^b$ ggfls. redo UB-Portale DA oder FaM}
+\end{center}
+
+
+\end{document}

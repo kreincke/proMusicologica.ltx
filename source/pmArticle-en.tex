@@ -1,0 +1,163 @@
+% This file is part of proMusicologica.ltx
+% (c) 2022 Karsten Reincke (https://github.com/kreincke/proMusicologica.ltx)
+% It is distributed under the terms of the creative commons license
+% CC-BY-4.0 (= https://creativecommons.org/licenses/by/4.0/)
+
+\documentclass[
+  DIV=calc,
+  BCOR=5mm,
+  11pt,
+  headings=small,
+  oneside,
+  abstract=true,
+  toc=bib,
+  ngerman,english]{scrartcl}
+
+%%% (1) general configurations %%%
+\usepackage[utf8]{inputenc}
+\usepackage{a4}
+\usepackage[ngerman,english]{babel}
+
+\usepackage[
+  backend=biber,
+  style=authortitle-dw,
+  sortlocale=auto,
+]{biblatex}
+\input{cfg/inc.cfg-biber-en.tex}
+
+\addbibresource{bib/lit.verify.bib}
+\addbibresource{bib/lit.main.bib}
+
+% package for improving the grey value and the line feed handling
+\usepackage{microtype}
+
+%language specific quoting signs
+\usepackage[
+  style=german,
+  autostyle=true,
+]{csquotes}
+
+% language specific hyphenation
+\input{cfg/inc.babelhyphenations.tex}
+
+%%% (3) layout page configuration %%%
+
+% select the visible parts of a page
+% S.31: { plain|empty|headings|myheadings }
+\pagestyle{headings}
+
+% select the wished style of page-numbering
+% S.32: { arabic,roman,Roman,alph,Alph }
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% select the wished distances using the general setlength order:
+% S.34 { baselineskip| parskip | parindent }
+% - general no indent for paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.2ex plus 0.2ex minus 0.2ex}
+
+
+%- start(footnote-configuration)
+
+\deffootnote[1.5em]{1.5em}{1.5em}{\textsuperscript{\thefootnotemark)\ }}
+
+% if document class = book: count footnotes from start to end
+%\counterwithout{footnote}{chapter}
+%- end(footnote-configuration)
+
+
+
+%for using label as nameref
+\usepackage{nameref}
+
+%integrate nomenclature
+\input{cfg/inc.cfg-ncl-en.tex}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{bookmarks=true,breaklinks=true,colorlinks=true,citecolor=blue,draft=false}
+\usepackage{longtable}
+
+\input{cfg/inc.cfg-musica.tex}
+
+\begin{document}
+
+%% use all entries of the bliography
+\nocite{*}
+
+\titlehead{Classification}
+\subject{Release \input{cfg/inc.rel.tex}}
+\title{Title}
+\subtitle{Subtitle}
+\author{Autor\input{cfg/inc.lfnote-en.tex}}
+
+\maketitle
+\begin{abstract}
+\noindent \itshape
+This is a template for easily writing a musicological article: Replace the given content demonstrating that your system works, by your own text.
+\end{abstract}
+
+
+\footnotesize
+\tableofcontents
+\normalsize
+
+\section{Context-Sensitive Quotation Test}
+\begin{itemize}
+  \item \enquote{complete data} = First initial quotation\footcite[vgl.][123]{Grabner1974a}
+  \item \enquote{idem ibid.} = same work, same page as before\footcite[cf.][123]{Grabner1974a}
+  \item \enquote{idem loc. cit., p.} = same work as before, different page\footcite[cf.][125f]{Grabner1974a}
+  \item \enquote{complete data} = Second initial quotation\footcite[vgl.][123]{Delamotte2011a}
+  \item \enquote{Shorttitel} = first work, first page, different context\footcite[cf.][123]{Grabner1974a}
+\end{itemize}
+
+\section{Music Integration Test}
+
+Inline usable symbols = \Takt{4}{4} \SePa \Vier\SechBL\SechBL\ \Halb\Pu\ $|$ \HH.T..... \HH.S.3.... \HH.D.3.9.7.. \HH.T....., then a Lilypond based sheet music sample:
+
+
+
+\begin{center}
+\begin{lilypond}
+\version "2.18.2"
+
+\header { tagline = "" }
+\include "lilypond/harmonyli.ly"
+
+\score {
+  \new StaffGroup {
+    \time 4/4
+    <<
+      \new Staff {
+        \relative d' {
+       	  \clef "treble" \key d \major  \stemUp
+          r1 | < fis a d>1 \bar "||"
+        }
+        \addlyrics {
+          \markup \setHas "T" #'(("" . " "))
+        }
+      }
+      \new Staff {
+        \relative d {
+          \clef "bass" \key d \major \stemDown
+          r4 d4 fis4 a | <d, d'>1 \bar "||"
+        }
+      }
+    >>
+  }
+  \layout {
+    \context { \Lyrics \consists "Text_spanner_engraver" }
+  }
+  \midi {}
+}
+
+\end{lilypond}
+\end{center}
+
+\input{bib/ncl.abbrevs-en.tex}
+\input{bib/ncl.journals.tex}
+\printnomenclature
+\printbibliography
+
+\end{document}

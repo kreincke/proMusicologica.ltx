@@ -1,0 +1,351 @@
+% This file is part of proMusicologica.ltx
+% (c) 2022 Karsten Reincke (https://github.com/kreincke/proMusicologica.ltx)
+% It is distributed under the terms of the creative commons license
+% CC-BY-4.0 (= https://creativecommons.org/licenses/by/4.0/)
+
+\documentclass[
+  DIV=calc,
+  BCOR=5mm,
+  11pt,
+  headings=small,
+  oneside,
+  abstract=true,
+  toc=bib,
+  ngerman,english]{scrbook}
+
+%%% (1) general configurations %%%
+\usepackage[utf8]{inputenc}
+\usepackage{a4}
+\usepackage[ngerman,english]{babel}
+
+\usepackage[
+  backend=biber,
+  style=authortitle-dw,
+  sortlocale=auto,
+]{biblatex}
+\input{cfg/inc.cfg-biber-en.tex}
+
+\addbibresource{bib/lit.verify.bib}
+\addbibresource{bib/lit.main.bib}
+
+% package for improving the grey value and the line feed handling
+\usepackage{microtype}
+
+%language specific quoting signs
+\usepackage[
+  style=german,
+  autostyle=true,
+]{csquotes}
+
+% language specific hyphenation
+\input{cfg/inc.babelhyphenations.tex}
+
+%%% (3) layout page configuration %%%
+
+% select the visible parts of a page
+% S.31: { plain|empty|headings|myheadings }
+\pagestyle{headings}
+
+% select the wished style of page-numbering
+% S.32: { arabic,roman,Roman,alph,Alph }
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% select the wished distances using the general setlength order:
+% S.34 { baselineskip| parskip | parindent }
+% - general no indent for paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.2ex plus 0.2ex minus 0.2ex}
+
+
+%- start(footnote-configuration)
+
+\deffootnote[1.5em]{1.5em}{1.5em}{\textsuperscript{\thefootnotemark)\ }}
+
+% if document class = book: count footnotes from start to end
+%\counterwithout{footnote}{chapter}
+%- end(footnote-configuration)
+
+
+
+%for using label as nameref
+\usepackage{nameref}
+
+%integrate nomenclature
+\input{cfg/inc.cfg-ncl-en.tex}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{bookmarks=true,breaklinks=true,colorlinks=true,citecolor=blue,draft=false}
+\usepackage{longtable}
+\input{cfg/inc.cfg-musica.tex}
+
+\begin{document}
+
+%% use all entries of the bliography
+\nocite{*}
+
+\titlehead{Classification}
+\subject{Release \input{cfg/inc.rel.tex}}
+\title{Title}
+\subtitle{Subtitle}
+\author{Autor\input{cfg/inc.lfnote-en.tex}}
+
+\maketitle
+\footnotesize
+\tableofcontents
+\normalsize
+
+\section{About the purpose of this text}
+\begin{quote}
+\itshape
+This is a \emph{\LaTeX}, \emph{Bib\LaTeX}, \emph{proScientia.ltx} and \emph{Lilypond} based template which is part of \emph{proMusicologica.ltx}. It is intended to facilitate the writing of musicological books and demonstrates its purpose by showing the quotation system and some inline and autonomous sheet music sample. Please replace that content by your own text.
+\end{quote}
+
+
+\chapter{Integrating Quotations and References}
+
+\section{Verifying the Quotation Marks}
+
+\begin{itemize}
+
+  \item \enquote{A citation with \enquote{an embedded citation}}. Expected Result: English quotation marks
+
+  \item An English Sentence \foreignquote{german}{mit einer fremdsprachlichen Phrase} as an embedded quotation. Expected result: German quotation marks for for the embedded phrase.
+
+  \item A quoted autonomous English sentence:
+  \begin{quote}
+    \enquote{This shall represent an English written paragraph containing
+    a set of sentences which together build the quote.}
+  \end{quote}
+  Expected result: English quotation marks.
+
+  \item A quoted autonomous German sentence:
+  \begin{quote}
+    \foreignquote{german}{Dies soll einen deutschsprachigen Absatz repräsentoieren mit mehreren Sätzen repräsentieren, die zusammen das Zitat bilden.}
+  \end{quote}
+  Expected result: German quotation marks, because an automous German sentence is quoted.
+\end{itemize}
+
+\section{Verifying citation references}
+\begin{itemize}
+  \item Book 1 (quoted for the first time)\footcite[vgl.][15]{Grabner1974a}
+  \item idem ibid.\footcite[cf.][15]{Grabner1974a}
+  \item idem. loc. cit.\footcite[vgl.][23]{Grabner1974a}
+  \item Book 2 (quoted for the first time)\footcite[vgl.][15]{Delamotte2011a}
+  \item Book 1 (quoted again)\footcite[vgl.][15]{Grabner1974a}
+\end{itemize}
+
+\chapter{Integration of Snippets}
+\begin{quote}\itshape
+In this chapter we explain \ldots
+\end{quote}
+
+\section{Snippet}
+\input{snippets/inc.snippet.tex}
+
+\chapter{Integration of Music into the Text}
+
+
+\section{Music note symbols for the body text}
+
+\begin{scriptsize}
+\begin{longtable}{|c|l|l|}
+\hline
+ & Command & From\\
+\hline
+\hline
+\Takt{2}{2} & \texttt{\tbsl{Takt}\{2\}\{2\}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\Takt{3}{4} & \texttt{\tbsl{Takt}\{3\}\{4\}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\Takt{4}{4} & \texttt{\tbsl{Takt}\{4\}\{4\}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+ & \ldots & \tbsl{usepackage\{harmony\}} \\
+\hline
+\Takt{c}{0} & \texttt{\tbsl{Takt}\{c\}\{0\}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\Takt{c}{1} & \texttt{\tbsl{Takt}\{c\}\{1\}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\meterCutC & \texttt{\tbsl{meterCutC}}& \tbsl{usepackage\{musicography\}} \\
+\hline
+$\sharp$ & \texttt{\$\tbsl{sharp}\$} & Mathematikumgebung \\
+\hline
+\musSharp & \texttt{\tbsl{musSharp}} & \tbsl{usepackage\{musicography\}} \\
+\hline
+\musDoubleSharp & \texttt{\tbsl{musDoubleSharp}} & \tbsl{usepackage\{musicography\}} \\
+\hline
+$\flat$ & \texttt{\$\tbsl{flat}\$} & Mathematikumgebung \\
+\hline
+\musFlat & \texttt{\tbsl{musFlat}} & \tbsl{usepackage\{musicography\}} \\
+\hline
+\musDoubleFlat & \texttt{\tbsl{musDoubleFlat}} & \tbsl{usepackage\{musicography\}} \\
+\hline
+$\natural$ & \texttt{\$\tbsl{natural}\$} & Mathematikumgebung \\
+\hline
+\musNatural & \texttt{\tbsl{musNatural}} & \tbsl{usepackage\{musicography\}} \\
+\hline
+\musWhole & \texttt{\tbsl{musWhole}} & \tbsl{usepackage\{musicography\}} \\
+\hline
+\Ganz & \texttt{\tbsl{Ganz}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\musHalfDotted & \texttt{\tbsl{musHalfDotted}} & \tbsl{usepackage\{musicography\}} \\
+\hline
+\Halb\Pu & \texttt{\tbsl{Halb}\tbsl{Pu}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\musHalf & \texttt{\tbsl{musHalf}} & \tbsl{usepackage\{musicography\}} \\
+\hline
+\Halb & \texttt{\tbsl{Halb}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\musQuarterDotted & \texttt{\tbsl{musQuarterDotted}}& \tbsl{usepackage\{musicography\}} \\
+\hline
+\Vier\Pu & \texttt{\tbsl{Vier}\tbsl{Pu}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\musQuarter & \texttt{\tbsl{musQuarter}} & \tbsl{usepackage\{musicography\}} \\
+\hline
+\Vier & \texttt{\tbsl{Vier}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\Acht\Pu & \texttt{\tbsl{Acht}\tbsl{Pu}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\musEighth & \texttt{\tbsl{musEighth}} & \tbsl{usepackage\{musicography\}} \\
+\hline
+\Acht & \texttt{\tbsl{Acht}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\AchtBL & \texttt{\tbsl{AchtBL}}\footnote{Werden die Elemente \emph{AchtBL} (= \AchtBL), \emph{AchtBR} (= \AchtBR\ ), \emph{SechBL} (= \SechBL) und \emph{SechBR} (= \SechBR\ ) mit den anderen Elementen geeignet verbunden, entstehen sogar rhythmische Ketten:
+\Takt{c}{0} \Vier\ \Vier\AchtBL\ \Vier\Pu\ \Acht\ $|$
+\AchtBR\Pu \SechBl \AchtBR\kern-0.15em\SechBR\Vier\ \SechBr\Vier\SechBl\ $|$ \
+=
+\tbsl{Vier}\tbsl{ }\tbsl{Vier}\tbsl{AchtBL}\tbsl{ }\tbsl{Vier}\tbsl{Pu}
+\tbsl{ }\tbsl{Acht}\tbsl{ }\$\textbar\$
+\tbsl{AchtBR}\tbsl{Pu} \tbsl{SechBl}
+\tbsl{AchtBR}\tbsl{kern-0.15em}\tbsl{SechBR}\tbsl{Vier}\tbsl{ }
+\tbsl{SechBr}\tbsl{Vier}\tbsl{SechBl}\tbsl{ }\$\textbar\$
+ } & \tbsl{usepackage\{harmony\}} \\
+\hline
+\AchtBR & \texttt{\tbsl{AchtBR}}  & \tbsl{usepackage\{harmony\}} \\
+\hline
+\Vier\AchtBL & \texttt{\tbsl{Vier} \tbsl{AchtBL}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\Sech\Pu & \texttt{\tbsl{Sech}\tbsl{Pu}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\musSixteenth & \texttt{\tbsl{musSixteenth}} & \tbsl{usepackage\{musicography\}} \\
+\hline
+\Sech & \texttt{\tbsl{Sech}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\SechBL & \texttt{\tbsl{SechBL}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\SechBR & \texttt{\tbsl{SechBR}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\Vier\SechBL & \texttt{\tbsl{Vier} \tbsl{SechBL} } & \tbsl{usepackage\{harmony\}} \\
+\hline
+\Zwdr & \texttt{\tbsl{Zwdr}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\hline
+\end{longtable}
+\end{scriptsize}
+
+\section{Harmony analysis symbols for the body text}
+
+\begin{scriptsize}
+\begin{longtable}{|c|l|l|}
+\hline
+ & Command & From \\
+\hline
+\hline
+\HH.T..... & \texttt{\tbsl{HH.T.....}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\HH.Tp..... & \texttt{ \tbsl{HH.Tp.....}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\HH.S..... & \texttt{\tbsl{HH.S.....}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\HH.D..... & \texttt{\tbsl{HH.D.....}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+ & \ldots & \tbsl{usepackage\{harmony\}} \\
+\hline
+\HH.D.3.9.7..  & \texttt{\tbsl{HH.D.3.9.7..}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\HH.T..9$\flat\rightarrow$8.7..  & \verb|\HH.T..9$\flat\rightarrow$8.7..| & \tbsl{usepackage\{harmony\}} \\
+\hline
+\Dohne & \texttt{\tbsl{Dohne}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\DD & \texttt{\tbsl{DD}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\DS & \texttt{\tbsl{DS}} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\HH.\DD.5\VM.7... & \texttt{\tbsl{HH}.\tbsl{DD}.5\tbsl{VM}.7...} & \tbsl{usepackage\{harmony\}} \\
+\hline
+\HH.I..\texttt{(5)}.\texttt{(3)}.. & \verb|\HH.I..\texttt{(5)}.\texttt{(3)}..| & \tbsl{usepackage\{harmony\}} \\
+\hline
+\HH.III..\texttt{ 6 }.\texttt{(3)}.. & \verb|\HH.III..\texttt{ 6 }.\texttt{(3)}..| & \tbsl{usepackage\{harmony\}} \\
+\hline
+\HH.V..\texttt{ 6}.\texttt{ 4}.. & \verb|\HH.V..\texttt{ 6}.\texttt{ 4}..| & \tbsl{usepackage\{harmony\}} \\
+\hline
+\HH.IV..\texttt{(5)}.\texttt{ 3$\flat$ }.. & \verb|\HH.IV..\texttt{(5)}.\texttt{ 3$\flat$ }.. | & \tbsl{usepackage\{harmony\}} \\
+\hline
+\HH.V..\texttt{ 6 }.\texttt{ 3$\flat$}.. & \verb|\HH.V..\texttt{ 6 }.\texttt{ 3$\flat$}..| & \tbsl{usepackage\{harmony\}} \\
+\hline
+\HH.V..\texttt{ 6$\rightarrow$7}.\texttt{ 5 }.\texttt{(3)}. & \verb|\HH.V..\texttt{6$\rightarrow$7}.\texttt{ 5 }.\texttt{(3)}.| & \tbsl{usepackage\{harmony\}} \\
+\hline
+\hline
+\end{longtable}
+\end{scriptsize}
+
+\section{A standalone sheet music example }
+
+\begin{center}
+\begin{lilypond}
+\version "2.18.2"
+
+\header { tagline = "" }
+\include "lilypond/harmonyli.ly"
+
+\score {
+  \new StaffGroup {
+    \time 4/4
+    <<
+      \new Staff {
+        \relative d' {
+       	  \clef "treble" \key d \major  \stemUp
+          < fis d'>2 < fis dis'>2 < b e>2 < b eis>2 |
+          < b fis'>2 < e gis >2 < e a >4 < e a >4 < a fis>2  \bar "||"
+        }
+        \addlyrics {
+          \markup \setHas "T" #'(("C"."D")("fr" . " "))
+          \markup \setImHas "D" #'(("B"."1")("a" . "7")("fr" . " "))
+          \markup \setHas "Sp" #'(("B"."7")("a" . "7")("fl" . " ")("fr" . " "))
+          \markup \setHas "D" #'(("T"."x")("B"."3")("a" . "5")("b" . "7")("c" . "♭9>♯8")("fr" . " "))
+          \markup \setHas "Tp" #'(("B"."3")("fl" . " ")("fr" . " "))
+          \markup \setHas "D" #'(("T"."d")("B"."5")("a" . "7")("b" . "8")("fr" . " "))
+          \initTextSpan "   "
+          \markup \openZoomRow "D" #'(("a"."4")("fl" . " "))
+          \startTextSpan
+          \markup \expZoomRow #'(("a"."3")("fr" . " "))
+          \stopTextSpan
+          \markup \setHas "T" #'(("fr" . " "))
+        }
+      }
+      \new Staff {
+        \relative d {
+          \clef "bass" \key d \major \stemDown
+          < d a'>2 < b a'>2 < d g>2 < cis g'>2 |
+          < d fis>2 < b d>2 << { a4( a4) } { d4( cis4) } >> < d, d'>2 \bar "||"
+        }
+      }
+    >>
+  }
+  \layout {
+    \context { \Lyrics \consists "Text_spanner_engraver" }
+  }
+  \midi {}
+}
+
+\end{lilypond}
+\end{center}
+
+
+\input{bib/ncl.abbrevs-en.tex}
+\input{bib/ncl.journals.tex}
+\printnomenclature
+\printbibliography
+
+\end{document}

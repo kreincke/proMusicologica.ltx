@@ -1,0 +1,239 @@
+% This file is part of proMusicologica.ltx
+% (c) 2022 Karsten Reincke (https://github.com/kreincke/proMusicologica.ltx)
+% It is distributed under the terms of the creative commons license
+% CC-BY-4.0 (= https://creativecommons.org/licenses/by/4.0/)
+
+\documentclass[
+  DIV=calc,i
+  BCOR=5mm,
+  11pt,
+  headings=small,
+  oneside,
+  abstract=true,
+  toc=bib,
+  english,ngerman]{scrartcl}
+
+%%% (1) general configurations %%%
+\usepackage[utf8]{inputenc}
+\usepackage{a4}
+
+%%% (2) language specific configurations %%%
+\usepackage[english,ngerman]{babel}
+%\selectlanguage{ngerman}
+
+\usepackage[
+  backend=biber,
+  style=authortitle-dw,
+  %style=authortitle,
+  sortlocale=auto,
+  %citestyle=
+]{biblatex}
+\input{../source/cfg/inc.cfg-biber-de.tex}
+
+\addbibresource{../source/bib/lit.demo.bib}
+\addbibresource{../source/bib/lit.verify.bib}
+
+% package for improving the grey value and the line feed handling
+\usepackage{microtype}
+
+%language specific quoting signs
+\usepackage[
+  style=german,
+  autostyle=true,
+]{csquotes}
+
+% language specific hyphenation
+\input{../source/cfg/inc.babelhyphenations.tex}
+
+%%% (3) layout page configuration %%%
+
+% select the visible parts of a page
+% S.31: { plain|empty|headings|myheadings }
+%\pagestyle{myheadings}
+\pagestyle{headings}
+
+% select the wished style of page-numbering
+% S.32: { arabic,roman,Roman,alph,Alph }
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% select the wished distances using the general setlength order:
+% S.34 { baselineskip| parskip | parindent }
+% - general no indent for paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.2ex plus 0.2ex minus 0.2ex}
+
+
+%%% (4) general package activation %%%
+%\usepackage{utopia}
+%\usepackage{courier}
+%\usepackage{avant}
+\usepackage[dvips]{epsfig}
+
+% graphic
+\usepackage{graphicx,color}
+\usepackage{array}
+\usepackage{shadow}
+\usepackage{fancybox}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes,snakes}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{trees}
+\usetikzlibrary{matrix}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{chngcntr}
+
+
+%- start(footnote-configuration)
+
+\deffootnote[1.5em]{1.5em}{1.5em}{\textsuperscript{\thefootnotemark)\ }}
+
+% if document class: count footnotes from start to end
+%\counterwithout{footnote}{chapter}
+%- end(footnote-configuration)
+
+% package for macking tables with broken lines
+\usepackage{multirow}
+
+%for using label as nameref
+\usepackage{nameref}
+
+%integrate nomenclature
+\input{../source/cfg/inc.cfg-ncl-de.tex}
+
+% depth of contents
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{bookmarks=true,breaklinks=true,colorlinks=true,citecolor=blue,draft=false}
+
+\begin{document}
+
+%% use all entries of the bliography
+\nocite{*}
+
+%%-- start(titlepage)
+\titlehead{Bib\LaTeX}
+\subject{Release 1.0}
+\title{Verifikation der deutschen Konfiguration}
+\subtitle{anhand einer abstrakten Bibliographie}
+\author{Autor\footnote{
+\textit{Erstellt auf der Basis des CC-BY-4.0 lizenzierten Templatesystems \texttt{proMusicologica} von Karsten Reincke \copyright{} 2022 [
+Repository: \href{https://github.com/kreincke/proMusicologica.ltx}{https://github.com/kreincke/proMusicologica.ltx} ,
+Lizenztext: \href{https://creativecommons.org/licenses/by/4.0/}{https://creativecommons.org/licenses/by/4.0/} ]}}
+}
+
+%thanks entry cannot be combined with license footnote
+%\thanks{den Autoren von KOMA-Script und denen von Jurabib}
+
+\maketitle
+%%-- end(titlepage)
+
+\footnotesize
+\tableofcontents
+
+\normalsize
+\section{Test: Zitatmarkierungen}
+\begin{itemize}
+
+  \item \enquote{Zitat mit \enquote{eingebettetem Zitat}}
+
+  \item Deutscher Satz \foreignquote{german}{with an embedded foreign phrase} als eingebettetes Zitat. Erwartetes Resultat: Deutsche Anführungszeichen, weil Teil in einem deutsche Satz. (Sprache explizit angegeben)
+
+  \item This is an Englich sentence \foreignquote{english}{mit einer eingebetten deutsche Phrase} as an embedded quote. Expected result: English signs. (Sprache explizit angegeben)
+
+  \item Autonomes englischsprachiges Zitat:
+  \begin{quote}\foreignquote{english}{This shall be an English written paragraph containing a set of sentences which together build the quote.}\end{quote}
+
+  Erwartetes Ergebnis: Englisches Anführungszeichen, um ein englischen Satz.
+\end{itemize}
+
+\section{Test: Literaturangaben}
+\subsection{Book}
+\begin{description}
+  \item[\mars]: Complete\footcite[vgl.][15]{B12020a}, ders. ebda.\footcite[vgl.][15]{B12020a}, ders. a.a.O.\footcite[vgl.][23]{B12020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{B12020a}
+  \item[\female]: Complete\footcite[vgl.][15]{B22020a}, dies. ebda.\footcite[vgl.][15]{B22020a}, dies. a.a.O.\footcite[vgl.][23]{B22020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{B22020a}
+  \item[\mars\mars]: Complete\footcite[vgl.][15]{B32020a}, dies. ebda.\footcite[vgl.][15]{B32020a}, dies. a.a.O.\footcite[vgl.][23]{B32020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{B32020a}
+  \item[\female\female]: Complete\footcite[vgl.][15]{B42020a}, dies. ebda.\footcite[vgl.][15]{B42020a}, dies. a.a.O.\footcite[vgl.][23]{B42020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{B42020a},
+  \item[\female\mars]: Complete\footcite[vgl.][15]{B52020a}, dies. ebda.\footcite[vgl.][15]{B52020a}, dies. a.a.O.\footcite[vgl.][23]{B52020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{B52020a},
+\end{description}
+
+\subsection{Article}
+\begin{description}
+  \item[\mars]: Complete\footcite[vgl.][15]{ZA12020a}, ders. ebda.\footcite[vgl.][15]{ZA12020a}, ders. a.a.O.\footcite[vgl.][23]{ZA12020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{ZA12020a}
+  \item[\female]: Complete\footcite[vgl.][15]{ZA22020a}, dies. ebda.\footcite[vgl.][15]{ZA22020a}, dies. a.a.O.\footcite[vgl.][23]{ZA22020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{ZA22020a}
+  \item[\mars\mars]: Complete\footcite[vgl.][15]{ZA32020a}, dies. ebda.\footcite[vgl.][15]{ZA32020a}, dies. a.a.O.\footcite[vgl.][23]{ZA32020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{ZA32020a}
+  \item[\female\female]: Complete\footcite[vgl.][15]{ZA42020a}, dies. ebda.\footcite[vgl.][15]{ZA42020a}, dies. a.a.O.\footcite[vgl.][23]{ZA42020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{ZA42020a},
+  \item[\female\mars]: Complete\footcite[vgl.][15]{ZA52020a}, dies. ebda.\footcite[vgl.][15]{ZA52020a}, dies. a.a.O.\footcite[vgl.][23]{ZA52020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{ZA52020a},
+\end{description}
+
+\subsection{Collections}
+\begin{description}
+  \item[\mars]: Complete\footcite[vgl.][15]{C12020a}, ders. ebda.\footcite[vgl.][15]{C12020a}, ders. a.a.O.\footcite[vgl.][23]{C12020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{C12020a}
+  \item[\female]: Complete\footcite[vgl.][15]{C22020a}, dies. ebda.\footcite[vgl.][15]{C22020a}, dies. a.a.O.\footcite[vgl.][23]{C22020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{C22020a}
+  \item[\mars\mars]: Complete\footcite[vgl.][15]{C32020a}, dies. ebda.\footcite[vgl.][15]{C32020a}, dies. a.a.O.\footcite[vgl.][23]{C32020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{C32020a}
+  \item[\female\female]: Complete\footcite[vgl.][15]{C42020a}, dies. ebda.\footcite[vgl.][15]{C42020a}, dies. a.a.O.\footcite[vgl.][23]{C42020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{C42020a},
+  \item[\female\mars]: Complete\footcite[vgl.][15]{C52020a}, dies. ebda.\footcite[vgl.][15]{C52020a}, dies. a.a.O.\footcite[vgl.][23]{C52020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{C52020a},
+\end{description}
+
+\subsection{Proceedings}
+\begin{description}
+  \item[\mars]: Complete\footcite[vgl.][15]{P12020a}, ders. ebda.\footcite[vgl.][15]{P12020a}, ders. a.a.O.\footcite[vgl.][23]{P12020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{P12020a}
+  \item[\female]: Complete\footcite[vgl.][15]{P22020a}, dies. ebda.\footcite[vgl.][15]{P22020a}, dies. a.a.O.\footcite[vgl.][23]{P22020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{P22020a}
+  \item[\mars\mars]: Complete\footcite[vgl.][15]{P32020a}, dies. ebda.\footcite[vgl.][15]{P32020a}, dies. a.a.O.\footcite[vgl.][23]{P32020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{P32020a}
+  \item[\female\female]: Complete\footcite[vgl.][15]{P42020a}, dies. ebda.\footcite[vgl.][15]{P42020a}, dies. a.a.O.\footcite[vgl.][23]{P42020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{P42020a},
+  \item[\female\mars]: Complete\footcite[vgl.][15]{P52020a}, dies. ebda.\footcite[vgl.][15]{P52020a}, dies. a.a.O.\footcite[vgl.][23]{P52020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{P52020a},
+\end{description}
+
+\subsection{Incollections}
+\begin{description}
+  \item[\mars]: Complete\footcite[vgl.][15]{ICA12020a}, ders. ebda.\footcite[vgl.][15]{ICA12020a}, ders. a.a.O.\footcite[vgl.][23]{ICA12020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{ICA12020a}
+  \item[\female]: Complete\footcite[vgl.][15]{ICA22020a}, dies. ebda.\footcite[vgl.][15]{ICA22020a}, dies. a.a.O.\footcite[vgl.][23]{ICA22020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{ICA22020a}
+  \item[\mars\mars]: Complete\footcite[vgl.][15]{ICA32020a}, dies. ebda.\footcite[vgl.][15]{ICA32020a}, dies. a.a.O.\footcite[vgl.][23]{ICA32020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{ICA32020a}
+  \item[\female\female]: Complete\footcite[vgl.][15]{ICA42020a}, dies. ebda.\footcite[vgl.][15]{ICA42020a}, dies. a.a.O.\footcite[vgl.][23]{ICA42020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{ICA42020a},
+  \item[\female\mars]: Complete\footcite[vgl.][15]{ICA52020a}, dies. ebda.\footcite[vgl.][15]{ICA52020a}, dies. a.a.O.\footcite[vgl.][23]{ICA52020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{ICA52020a},
+\end{description}
+
+\subsection{Inproceedings}
+\begin{description}
+  \item[\mars]: Complete\footcite[vgl.][15]{IPA12020a}, ders. ebda.\footcite[vgl.][15]{IPA12020a}, ders. a.a.O.\footcite[vgl.][23]{IPA12020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{IPA12020a}
+  \item[\female]: Complete\footcite[vgl.][15]{IPA22020a}, dies. ebda.\footcite[vgl.][15]{IPA22020a}, dies. a.a.O.\footcite[vgl.][23]{IPA22020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{IPA22020a}
+  \item[\mars\mars]: Complete\footcite[vgl.][15]{IPA32020a}, dies. ebda.\footcite[vgl.][15]{IPA32020a}, dies. a.a.O.\footcite[vgl.][23]{IPA32020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{IPA32020a}
+  \item[\female\female]: Complete\footcite[vgl.][15]{IPA42020a}, dies. ebda.\footcite[vgl.][15]{IPA42020a}, dies. a.a.O.\footcite[vgl.][23]{IPA42020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{IPA42020a},
+  \item[\female\mars]: Complete\footcite[vgl.][15]{IPA52020a}, dies. ebda.\footcite[vgl.][15]{IPA52020a}, dies. a.a.O.\footcite[vgl.][23]{IPA52020a}, break\footcite[vgl.][15]{BR2020a}, ShortTitle\footcite[vgl.][15]{IPA52020a},
+\end{description}
+
+\subsection{Derselbe Autor / Verschiedene Werke}
+\begin{description}
+  \item[\mars]: Complete-A1-W1\footcite[vgl.][15]{S12020a}, Complete-A1-W2\footcite[vgl.][15]{S22020a},break\footcite[vgl.][15]{BR2020a}, Short-A1-W1\footcite[vgl.][15]{S12020a}, Short-A1-W2\footcite[vgl.][15]{S22020a},
+  \item[\female\female]: Complete-A1-W1\footcite[vgl.][15]{S32020a}, Complete-A1-W2\footcite[vgl.][15]{S42020a},break\footcite[vgl.][15]{BR2020a}, Short-A1-W1\footcite[vgl.][15]{S32020a}, Short-A1-W2\footcite[vgl.][15]{S42020a},
+\end{description}
+
+\subsection{Spezielle Litartursorten}
+\begin{itemize}
+  \item misc\footcite[vgl.][15]{M12020a}, online\footcite[vgl.][15]{O12020a}, unpublished\footcite[vgl.][15]{UP12020a}, www\footcite[vgl.][15]{W12020a}
+\end{itemize}
+
+
+\section{Test: Texts}
+
+\begin{itemize}
+  \item Dieser Satz ist ein Babel-hyphenation-check Testwort ist wortmitfalschentrennungen
+  \item Hier eine englischer Verweis: Complete-EB\footcite[vgl.][15]{L12020a}, break\footcite[vgl.][15]{BR2020a}, Short-EB\footcite[vgl.][15]{L12020a}
+\end{itemize}
+
+\input{../source/bib/ncl.abbrevs-de.tex}
+\input{../source/bib/ncl.journals.tex}
+\printnomenclature
+\printbibliography
+
+\end{document}

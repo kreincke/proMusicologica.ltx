@@ -1,0 +1,253 @@
+% This file is part of proMusicologica.ltx
+% (c) 2022 Karsten Reincke (https://github.com/kreincke/proMusicologica.ltx)
+% It is distributed under the terms of the creative commons license
+% CC-BY-4.0 (= https://creativecommons.org/licenses/by/4.0/)
+
+\documentclass[
+  DIV=calc,
+  BCOR=5mm,
+  11pt,
+  headings=small,
+  oneside,
+  abstract=true,
+  toc=bib,
+  ngerman,english]{scrartcl}
+
+%%% (1) general configurations %%%
+\usepackage[utf8]{inputenc}
+\usepackage{a4}
+\usepackage[ngerman,english]{babel}
+
+\usepackage[
+  backend=biber,
+  style=authortitle-dw,
+  sortlocale=auto,
+]{biblatex}
+\input{../source/cfg/inc.cfg-biber-en.tex}
+
+\addbibresource{../source/bib/lit.verify.bib}
+%\addbibresource{../source/bib/lit.main.bib}
+
+% package for improving the grey value and the line feed handling
+\usepackage{microtype}
+
+%language specific quoting signs
+\usepackage[
+  style=german,
+  autostyle=true,
+]{csquotes}
+
+% language specific hyphenation
+\input{../source/cfg/inc.babelhyphenations.tex}
+
+%%% (3) layout page configuration %%%
+
+% select the visible parts of a page
+% S.31: { plain|empty|headings|myheadings }
+\pagestyle{headings}
+
+% select the wished style of page-numbering
+% S.32: { arabic,roman,Roman,alph,Alph }
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% select the wished distances using the general setlength order:
+% S.34 { baselineskip| parskip | parindent }
+% - general no indent for paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.2ex plus 0.2ex minus 0.2ex}
+
+
+%- start(footnote-configuration)
+
+\deffootnote[1.5em]{1.5em}{1.5em}{\textsuperscript{\thefootnotemark)\ }}
+
+%integrate nomenclature
+\input{../source/cfg/inc.cfg-ncl-en.tex}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{bookmarks=true,breaklinks=true,colorlinks=true,citecolor=blue,draft=false}
+
+\usepackage[dvips]{epsfig}
+
+% graphic
+\usepackage{graphicx,color}
+\usepackage{array}
+\usepackage{shadow}
+\usepackage{fancybox}
+
+
+%- end(footnote-configuration)
+
+% package for macking tables with broken lines
+\usepackage{multirow}
+
+%for using label as nameref
+\usepackage{nameref}
+
+
+\newcommand{\LibraryCatalogA}{Library Catalog A }
+\newcommand{\LibraryCatalogB}{Library Catalog B }
+\newcommand{\LibraryCatalogC}{Library Catalog C }
+\newcommand{\LibraryCatalogD}{Library Catalog D }
+\newcommand{\LibraryCatalogE}{Library Catalog E }
+\newcommand{\LibraryCatalogF}{Library Catalog F }
+\newcommand{\LibraryCatalogG}{Library Catalog G }
+\newcommand{\LibraryCatalogH}{Library Catalog H }
+\newcommand{\LibraryCatalogI}{Library Catalog I }
+\newcommand{\LibraryCatalogJ}{Library Catalog J }
+\newcommand{\LibraryCatalogK}{Library Catalog K }
+%\newcommand{\LibraryCatalogL}{Library Catalog A}
+%\newcommand{\LibraryCatalogM}{Library Catalog A}
+%\newcommand{\LibraryCatalogN}{Library Catalog A}
+%\newcommand{\LibraryCatalogO}{Library Catalog A}
+%\newcommand{\LibraryCatalogP}{Library Catalog A}
+\newcommand{\LibraryCatalogX}{Library Catalog ?}
+
+\newcommand{\SearchItemA}{Search Item A}
+\newcommand{\SearchItemB}{Search Item B}
+\newcommand{\SearchItemC}{Search Item C}
+\newcommand{\SearchItemD}{Search Item D}
+\newcommand{\SearchItemE}{Search Item E}
+\newcommand{\SearchItemF}{Search Item F}
+\newcommand{\SearchItemG}{Search Item G}
+\newcommand{\SearchItemH}{Search Item H}
+\newcommand{\SearchItemI}{Search Item I}
+\newcommand{\SearchItemJ}{Search Item J}
+\newcommand{\SearchItemK}{Search Item L}
+\newcommand{\SearchItemL}{Search Item M}
+
+% Marker for a catalog classification
+\newcommand{\NecessaryCatalog}{$\clubsuit$}
+\newcommand{\NecessaryCatalogDefinition}{necessary catalog}
+\newcommand{\ImportantCatalog}{$\spadesuit$}
+\newcommand{\ImportantCatalogDefinition}{important catalog}
+\newcommand{\UsefulCatalog}{$\heartsuit$}
+\newcommand{\UsefulCatalogDefinition}{useful catalog}
+\newcommand{\PossibleCatalog}{$\diamondsuit$}
+\newcommand{\PossibleCatalogDefinition}{potential catalog}
+
+% Marker for a status reportin
+\newcommand{\many}{$\ast$}
+\newcommand{\manyDef}{found many hits}
+\newcommand{\some}{$\star$}
+\newcommand{\someDef}{found some hits}
+\newcommand{\few}{$\odot$}
+\newcommand{\fewDef}{found a few hits}
+\newcommand{\nothing}{$\neg$}
+\newcommand{\nothingDef}{didn't found any hits}
+\newcommand{\ongoing}{$\circ$}
+\newcommand{\ongoingDef}{current evaluation}
+\newcommand{\open}{?}
+\newcommand{\openDef}{future evaluation}
+\newcommand{\ignored}{-}
+\newcommand{\ignoredDef}{canceled evaluation}
+
+
+%% use all entries of the bliography
+
+\begin{document}
+
+
+\begin{table}
+\scriptsize
+\caption{Resources of the University Library XYZ}
+\begin{center}
+\begin{tabular}[h]{|r|c|c|c||c||c|c|c|c||c|c|c|c|c|c|c|c||c|}
+\hline
+& \rotatebox{90}{$\clubsuit$ \textit{\LibraryCatalogA}}
+& \rotatebox{90}{$\clubsuit$ \textit{\LibraryCatalogB}}
+& \rotatebox{90}{$\clubsuit$ \textit{\LibraryCatalogC}}
+& \rotatebox{90}{$\spadesuit$ \textit{\LibraryCatalogD}}
+& \rotatebox{90}{$\heartsuit$ \textit{\LibraryCatalogE}}
+& \rotatebox{90}{$\heartsuit$ \textit{\LibraryCatalogF}}
+& \rotatebox{90}{$\heartsuit$ \textit{\LibraryCatalogG}}
+& \rotatebox{90}{$\heartsuit$ \textit{\LibraryCatalogH}}
+& \rotatebox{90}{$\diamondsuit$ \textit{\LibraryCatalogI}}
+& \rotatebox{90}{$\diamondsuit$ \textit{\LibraryCatalogJ}}
+& \rotatebox{90}{$\diamondsuit$ \textit{\LibraryCatalogK}}
+& \rotatebox{90}{\textit{\LibraryCatalogX}}
+\\
+\hline \hline
+\SearchItemA
+  & \many & \some & \few & \nothing & \ongoing & \open
+  & \ignored & ? & ? & ? & ? & ?\\
+\hline
+\SearchItemB
+  & ? & ? & ? & ? & ? & ?
+  & ? & ? & ? & ? & ? & ?\\
+\hline
+\SearchItemC
+  & ? & ? & ? & ? & ? & ?
+  & ? & ? & ? & ? & ? & ?\\
+\hline
+\SearchItemD
+  & ? & ? & ? & ? & ? & ?
+  & ? & ? & ? & ? & ? & ?\\
+\hline
+\SearchItemE
+  & ? & ? & ? & ? & ? & ?
+  & ? & ? & ? & ? & ? & ?\\
+\hline
+\SearchItemF
+  & ? & ? & ? & ? & ? & ?
+  & ? & ? & ? & ? & ? & ?\\
+\hline
+\SearchItemG
+  & ? & ? & ? & ? & ? & ?
+  & ? & ? & ? & ? & ? & ?\\
+\hline
+\SearchItemH
+  & ? & ? & ? & ? & ? & ?
+  & ? & ? & ? & ? & ? & ?\\
+\hline
+\SearchItemI
+  & ? & ? & ? & ? & ? & ?
+  & ? & ? & ? & ? & ? & ?\\
+\hline
+\SearchItemJ
+  & ? & ? & ? & ? & ? & ?
+  & ? & ? & ? & ? & ? & ?\\
+\hline
+\SearchItemK
+  & ? & ? & ? & ? & ? & ?
+  & ? & ? & ? & ? & ? & ?\\
+\hline
+\SearchItemL
+  & ? & ? & ? & ? & ? & ?
+  & ? & ? & ? & ? & ? & ?\\
+\hline
+\hline
+
+\end{tabular}
+\end{center}
+\end{table}
+
+\textbf{Literature research} in the library of the university
+\emph{XYZ}\footcite[s.][n.P.]{UbXYZ2018a}:
+
+
+\begin{description}
+  \item[Status of the Catalogues] :-
+    \begin{description}
+      \item[\NecessaryCatalog] :- \NecessaryCatalogDefinition
+      \item[\ImportantCatalog] :- \ImportantCatalogDefinition
+      \item[\UsefulCatalog] :- \UsefulCatalogDefinition
+      \item[\PossibleCatalog] :- \PossibleCatalogDefinition
+    \end{description}
+  \item[Status of the report] :-
+    \begin{description}
+      \item[\many] :- \manyDef
+      \item[\some] :- \someDef
+      \item[\few] :- \fewDef
+      \item[\nothing] :- \nothingDef
+      \item[\ongoing] :- \ongoingDef
+      \item[\open] :- \openDef
+      \item[\ignored] :- \ignoredDef
+    \end{description}
+\end{description}
+
+
+
+\end{document}
