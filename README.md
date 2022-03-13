@@ -20,7 +20,7 @@
   <a href="#licensing">Licensing</a>
 </p>
 
-***proMusicologica.ltx*** offers a set of configuration- and template-files that allow scholars to do icological research work on the base of *LaTeX*, *BibLaTeX*, *Biber*, *Jabref* and *Lilypond*. The visible result of these tools, the respective configuration files and content files follow the style of (German) classical philology, German studies and (German) history. In addition to what these disciplines require, musicology needs the possibility, to integrate sheet music samples and music symbols into its scientific texts. Offering that is the main task of *proMusicologica.ltx*.
+***proMusicologica.ltx*** offers a set of configuration- and template-files that allow scholars to do musicological research work on the base of *LaTeX*, *BibLaTeX*, *Biber*, *Jabref* and *Lilypond*. The visible result of these tools, the respective configuration files and content files follow the style of (German) classical philology, German studies and (German) history. In addition to what these disciplines require, musicology needs the possibility, to integrate sheet music samples and music symbols into its scientific texts. Offering that is the main task of *proMusicologica.ltx*.
 
 ## Getting you own usable project directory
 
