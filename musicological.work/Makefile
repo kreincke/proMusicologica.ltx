@@ -3,7 +3,7 @@
 # It is distributed under the terms of the creative commons license
 # CC-BY-4.0 (= https://creativecommons.org/licenses/by/4.0/)
 
-PMAD=pmArticle-de
+PMAD=msw-de
 PMWD=proMusil
 SRCD=source
 LPWD=lily
