@@ -1,0 +1,184 @@
+% This file is part of proMusicologica.ltx
+% (c) 2022 Karsten Reincke (https://github.com/kreincke/proMusicologica.ltx)
+% It is distributed under the terms of the creative commons license
+% CC-BY-4.0 (= https://creativecommons.org/licenses/by/4.0/)
+
+\documentclass[
+  DIV=calc,
+  BCOR=5mm,
+  11pt,
+  headings=small,
+  oneside,
+  abstract=true,
+  toc=bib,
+  english,ngerman]{scrartcl}
+
+%%% (1) general configurations %%%
+\usepackage[utf8]{inputenc}
+\usepackage{a4}
+\usepackage[english,ngerman]{babel}
+
+\usepackage[
+  backend=biber,
+  style=authortitle-dw,
+  sortlocale=auto,
+]{biblatex}
+\input{cfg/inc.cfg-biber-de.tex}
+
+\addbibresource{bib/lit.verify.bib}
+\addbibresource{bib/lit.main.bib}
+
+% package for improving the grey value and the line feed handling
+\usepackage{microtype}
+
+%language specific quoting signs
+\usepackage[
+  style=german,
+  autostyle=true,
+]{csquotes}
+
+% language specific hyphenation
+\input{cfg/inc.babelhyphenations.tex}
+
+%%% (3) layout page configuration %%%
+
+% select the visible parts of a page
+% S.31: { plain|empty|headings|myheadings }
+\pagestyle{headings}
+
+% select the wished style of page-numbering
+% S.32: { arabic,roman,Roman,alph,Alph }
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% select the wished distances using the general setlength order:
+% S.34 { baselineskip| parskip | parindent }
+% - general no indent for paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.2ex plus 0.2ex minus 0.2ex}
+
+
+%- start(footnote-configuration)
+
+\deffootnote[1.5em]{1.5em}{1.5em}{\textsuperscript{\thefootnotemark)\ }}
+
+% if document class = book: count footnotes from start to end
+%\counterwithout{footnote}{chapter}
+%- end(footnote-configuration)
+
+
+
+%for using label as nameref
+\usepackage{nameref}
+
+%integrate nomenclature
+\input{cfg/inc.cfg-ncl-de.tex}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{bookmarks=true,breaklinks=true,colorlinks=true,citecolor=blue,draft=false}
+\usepackage{longtable}
+
+\input{cfg/inc.cfg-musica.tex}
+
+
+\begin{document}
+
+%% use all entries of the bliography
+\nocite{*}
+
+\titlehead{Klassifikation}
+\subject{Release \input{cfg/inc.rel.tex}}
+\title{Musikwissenschaftliches Arbeiten}
+\subtitle{Wie es leichter gehen könnte}
+\author{Karsten Reincke\input{cfg/inc.lfnote-de.tex}}
+
+\maketitle
+
+\begin{abstract}
+\noindent \itshape
+Dies ist ein \LaTeX, Bib\LaTeX, \emph{proMusicologica.ltx} und \emph{Lilypond} basiertes Template für leicht zu scheibende musikwissenschaftliche Artikel. Es demonstriert seinen Zweck mit einer Zitatverifikation und integrierten Notenbeispielen -- nur, damit Sie das durch Ihren eigenen Text ersetzen.
+\end{abstract}
+
+\footnotesize
+\tableofcontents
+\normalsize
+
+\section{Worum es geht.}
+Die Geschichte der Musikwissenschaft als Wissenschaft muss noch geschrieben werden.
+
+Natürlich: schon eine einfache Suche mit 'Google Scholar' listet Texte auf, die diesem Thema nachzugehen vorgeben. Doch detailliert betrachtet, verhandeln sie die Musikwissenschaft als Fach von ihrem Gegenstand oder von der einer Teildisziplin spezifischen Methodik her, nicht aber von ihrer spezifischen Wissenschaftlichkeit her. Das zeigen auch mehr oder minder aktuelle Einführung in die Musikwissenschaft.
+
+Die angehende Musikwissenschaftlerin muss das bedrängen. Denn natürlich ist nicht jede Arbeit, die sich mit a b c neschäftigt, schon allein deswegen eine musikwissenschaftliche Arbeit. Es muss also zusätzliche Kriterien geben, die ihre Texten erfüllen müssen, wenn sie musikwissenschaftliche Arbeiten sein wollen. Schön wäre es, wenn die Musikwissenschaft selbst sich ihre Wissenschaftlichkeit versichert, diese sekundär Kriterien offenlegt und deren Wandel über die Zeit dokumentiert. Das wäre dann eine Geschichte der Musikwissenschaft als Wissenschaft.
+
+Bis dahin beerbt die Musikwissenschaft in dieser Hinsicht Nachbardisziplinen.
+
+Das Bedrängende für die  angehende Musikwissenschaftlerin besteht konkret darin, dass sie sich einen Set von Tools für Kriterien zusammenstellen muss, die ihr von ihrer Disziplin her noch nicht systematisch angeboten werden.
+
+Hier möchte die vorliegende Arbeit einspringen: Sie will nicht das Desiderat beschreiben und als Desiderat belegen. Sie will vielmehr ein Tool für das musikwissenschatliche Schreiben vorstellen, dass den Schreibstil der Alt-Philologie, der Philosphie und der Geschichtswissenschaft auf die Musikwissenschaft begründet überträgt.
+
+Natürlich wissen wir, dass es in der Musikwissenschaft andere Stile gibt, ... So soll dieser Text auch begründen, warum wir diesen einen vorziehen. Insgesamt darf sie also auch als ein selbszreferentielles Tutorial gelesen werden: sie zeigt, wie es sein sollte, und erlaubt über die Einsicht in den Quellcode einen Blick, wie es technisch umgesetzt wird.
+
+\section{Was der Zweck ist.}
+
+\section{Wie es umgesetzt wird.}
+
+
+\section{Kontextsensitiver Zitattest}
+
+\begin{itemize}
+  \item \enquote{Alle Daten} = 1. Initialzitat\footcite[vgl.][123]{Grabner1974a}
+  \item \enquote{ders. ebda} = dasselbe Werk, dieselbe Seite\footcite[vgl.][123]{Grabner1974a}
+  \item \enquote{ders. a.a.O. p.} = dasselbe Werk, andere Seite\footcite[vgl.][125f]{Grabner1974a}
+  \item \enquote{Alle Daten} = 2. Initialzitat\footcite[vgl.][123]{Delamotte2011a}
+  \item \enquote{Kurztitel} = erstes Werk, erste Seite, anderer  Kontext\footcite[vgl.][123]{Grabner1974a}
+\end{itemize}
+
+\section{Musikintegrationstest}
+
+Inline-Symbole in der Zeile = \Takt{4}{4} \SePa \Vier\SechBL\SechBL\ \Halb\Pu\ $|$ \HH.T..... \HH.S.3.... \HH.D.3.9.7.. \HH.T....., danach ein Lilypond basiertes Notenbeispiel:
+
+\begin{center}
+\begin{lilypond}
+\version "2.18.2"
+
+\header { tagline = "" }
+\include "lilypond/harmonyli.ly"
+
+\score {
+  \new StaffGroup {
+    \time 4/4
+    <<
+      \new Staff {
+        \relative d' {
+       	  \clef "treble" \key d \major  \stemUp
+          r1 | < fis a d>1 \bar "||"
+        }
+        \addlyrics {
+          \markup \setHas "T" #'(("" . " "))
+        }
+      }
+      \new Staff {
+        \relative d {
+          \clef "bass" \key d \major \stemDown
+          r4 d4 fis4 a | <d, d'>1 \bar "||"
+        }
+      }
+    >>
+  }
+  \layout {
+    \context { \Lyrics \consists "Text_spanner_engraver" }
+  }
+  \midi {}
+}
+
+\end{lilypond}
+\end{center}
+
+
+\input{bib/ncl.abbrevs-de.tex}
+\input{bib/ncl.journals.tex}
+\printnomenclature
+\printbibliography
+
+\end{document}

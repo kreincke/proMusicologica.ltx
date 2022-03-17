@@ -1,0 +1,117 @@
+% This file is part of proMusicologica.ltx
+% (c) 2022 Karsten Reincke (https://github.com/kreincke/proMusicologica.ltx)
+% It is distributed under the terms of the creative commons license
+% CC-BY-4.0 (= https://creativecommons.org/licenses/by/4.0/)
+
+\documentclass[
+  DIV=calc,
+  BCOR=5mm,
+  11pt,
+  headings=small,
+  oneside,
+  abstract=true,
+  toc=bib,
+  english,ngerman]{scrartcl}
+
+%%% (1) general configurations %%%
+\usepackage[utf8]{inputenc}
+\usepackage{a4}
+\usepackage[english,ngerman]{babel}
+
+\usepackage[
+  backend=biber,
+  style=authortitle-dw,
+  sortlocale=auto,
+]{biblatex}
+\input{../source/cfg/inc.cfg-biber-de.tex}
+
+\addbibresource{../source/bib/lit.verify.bib}
+\addbibresource{../source/bib/lit.main.bib}
+
+% package for improving the grey value and the line feed handling
+\usepackage{microtype}
+
+%language specific quoting signs
+\usepackage[
+  style=german,
+  autostyle=true,
+]{csquotes}
+
+% language specific hyphenation
+\input{../source/cfg/inc.babelhyphenations.tex}
+
+%%% (3) layout page configuration %%%
+
+% select the visible parts of a page
+% S.31: { plain|empty|headings|myheadings }
+\pagestyle{headings}
+
+% select the wished style of page-numbering
+% S.32: { arabic,roman,Roman,alph,Alph }
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% select the wished distances using the general setlength order:
+% S.34 { baselineskip| parskip | parindent }
+% - general no indent for paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.2ex plus 0.2ex minus 0.2ex}
+
+
+%- start(footnote-configuration)
+
+\deffootnote[1.5em]{1.5em}{1.5em}{\textsuperscript{\thefootnotemark)\ }}
+
+%for using label as nameref
+\usepackage{nameref}
+
+%integrate nomenclature
+\input{../source/cfg/inc.cfg-ncl-de.tex}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{bookmarks=true,breaklinks=true,colorlinks=true,citecolor=blue,draft=false}
+
+\begin{document}
+
+%% use all entries of the bliography
+\nocite{*}
+
+%%-- start(titlepage)
+\titlehead{Bib\LaTeX}
+\subject{Release 1.0}
+\title{Test bibliographischer Angaben\footnote{
+\textit{Erstellt auf der Basis des CC-BY-4.0 lizenzierten Templatesystems \texttt{proMusicologica} von Karsten Reincke \copyright{} 2022 [
+Repository: \href{https://github.com/kreincke/proMusicologica.ltx}{https://github.com/kreincke/proMusicologica.ltx} ,
+Lizenztext: \href{https://creativecommons.org/licenses/by/4.0/}{https://creativecommons.org/licenses/by/4.0/} ]}}
+}
+
+
+\maketitle
+%%-- end(titlepage)
+\begin{abstract}
+\noindent \itshape
+Ein bibliographischer Eintrag in \texttt{lit.main.bib} wird fallweise ausgetestet:
+\end{abstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Replace KantKdrV1974 by the BibtexKey of the dataset you want to test %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Kontextsensitiver Test}
+
+\begin{itemize}
+  \item \enquote{Alle Daten} = Initialzitat 1\footcite[vgl.][123]{Grabner1974a}
+  \item \enquote{ders. ebda} = dasselbe Werk, dieselbe Seite\footcite[vgl.][123]{Grabner1974a4}
+  \item \enquote{ders. a.a.O. p.} = dasselbe Werk, andere Seite\footcite[vgl.][125f]{Grabner1974a}
+  \item \enquote{Alle Daten} = Initialzitat 2\footcite[vgl.][123]{Delamotte2011a}
+  \item \enquote{Kurztitel} = erstes Werk, erste Seite, anderer  Kontext\footcite[vgl.][123]{Grabner1974a}
+\end{itemize}
+
+\input{../source/bib/ncl.abbrevs-de.tex}
+\input{../source/bib/ncl.journals.tex}
+\printnomenclature
+\printbibliography
+
+\end{document}

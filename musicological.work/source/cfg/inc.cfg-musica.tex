@@ -1,0 +1,20 @@
+% This file is part of proMusicologica.ltx
+% (c) 2022 Karsten Reincke (https://github.com/kreincke/proMusicologica.ltx)
+% It is distributed under the terms of the creative commons license
+% CC-BY-4.0 (= https://creativecommons.org/licenses/by/4.0/)
+
+\usepackage{musicography}
+\usepackage{harmony}
+
+\newcommand{\tbsl}[1]{\textbackslash{#1}}
+% Unfortunately not only musixtex, but also musicography and/or harmony
+% still use outdated commands. So, we must 'redefine' these outdated commands:
+\makeatletter
+\DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
+\DeclareOldFontCommand{\sf}{\normalfont\sffamily}{\mathsf}
+\DeclareOldFontCommand{\tt}{\normalfont\ttfamily}{\mathtt}
+\DeclareOldFontCommand{\bf}{\normalfont\bfseries}{\mathbf}
+\DeclareOldFontCommand{\it}{\normalfont\itshape}{\mathit}
+\DeclareOldFontCommand{\sl}{\normalfont\slshape}{\@nomath\sl}
+\DeclareOldFontCommand{\sc}{\normalfont\scshape}{\@nomath\sc}
+\makeatother
